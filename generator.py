@@ -7,6 +7,14 @@ class NumberGenerator:
         :param min_val: minimum value in range (inclusive)
         :param max_val: maximum value in range (inclusive)
         """
+        self._min_val = 0
+        self._max_val = 0
+        self.set_range(min_val, max_val)
+
+    def set_range(self, min_val, max_val):
+        if min_val > max_val:
+            raise ValueError("Min value cannot be higher than max value!")
+
         self._min_val = min_val
         self._max_val = max_val
 
