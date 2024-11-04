@@ -1,15 +1,16 @@
 import pytest
 import subprocess
 import sys
+import os
 from statistics import median, mean
 from program_b import calc_median, calc_average, send_message, receive_message
-from settings import TERMINATE_CMD
 
 
 @pytest.fixture()
 def dummy_read_print() -> subprocess.Popen:
-    return subprocess.Popen([sys.executable, "dummy_read_print.py"], stdin=subprocess.PIPE,
-                            stdout=subprocess.PIPE)
+    return subprocess.Popen(
+        [sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "dummy_read_print.py")],
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
 
 def test_send_receive_message(dummy_read_print):
@@ -19,7 +20,7 @@ def test_send_receive_message(dummy_read_print):
     send_message(dummy_read_print, "second message")
     assert receive_message(dummy_read_print) == "second message"
 
-    send_message(dummy_read_print, TERMINATE_CMD)
+    send_message(dummy_read_print, "STOP")
     assert receive_message(dummy_read_print) == ""
     assert receive_message(dummy_read_print) == ""
     with pytest.raises(OSError):
