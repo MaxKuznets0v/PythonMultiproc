@@ -33,3 +33,10 @@ In order to run task, update `config.ini` file with necessary data and call:
 ```commandline
 python program_b.py
 ```
+
+### Tests
+
+Tests are implemented using `pytest` package (you have to install it with `pip install pytest`). Overall it has 10 tests, covering different code parts. You can run them by calling following code from the root directory:
+```commandline
+python -m pytest tests
+```
