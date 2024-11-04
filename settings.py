@@ -1,8 +1,9 @@
+import os
 from configparser import ConfigParser
 
 # Parsing configuration from a file.
 config = ConfigParser()
-config.read("config.ini")
+config.read(os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.ini"))
 
 commands = config["Commands"]
 HELLO_CMD = commands["Hello"]
